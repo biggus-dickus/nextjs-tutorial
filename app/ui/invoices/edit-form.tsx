@@ -1,24 +1,33 @@
-'use client';
+'use client'
 
-import { CustomerField, InvoiceForm } from '@/app/lib/definitions';
+import { useFormState } from 'react-dom'
+
 import {
   CheckIcon,
   ClockIcon,
   CurrencyDollarIcon,
   UserCircleIcon,
-} from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import { Button } from '@/app/ui/button';
+} from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
-export default function EditInvoiceForm({
-  invoice,
-  customers,
-}: {
-  invoice: InvoiceForm;
-  customers: CustomerField[];
-}) {
+import { CustomerField, InvoiceForm } from '@/app/lib/definitions'
+import { updateInvoice } from '@/app/lib/actions'
+
+import { Button } from '@/app/ui/button'
+
+const initialState = { message: null, errors: {} }
+
+type PropTypes = {
+  invoice: InvoiceForm
+  customers: CustomerField[]
+}
+
+export default function EditInvoiceForm({ invoice, customers }: PropTypes) {
+  const updateInvoiceWithId = updateInvoice.bind(null, invoice.id)
+  const [state, dispatch] = useFormState(updateInvoiceWithId, initialState)
+
   return (
-    <form>
+    <form action={dispatch}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
@@ -109,6 +118,7 @@ export default function EditInvoiceForm({
           </div>
         </fieldset>
       </div>
+
       <div className="mt-6 flex justify-end gap-4">
         <Link
           href="/dashboard/invoices"
@@ -119,5 +129,5 @@ export default function EditInvoiceForm({
         <Button type="submit">Edit Invoice</Button>
       </div>
     </form>
-  );
+  )
 }

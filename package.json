@@ -5,6 +5,7 @@
     "dev": "next dev -p 1488",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
+    "lint": "next lint",
     "start": "next start",
     "seed": "node -r dotenv/config ./scripts/seed.js"
   },
