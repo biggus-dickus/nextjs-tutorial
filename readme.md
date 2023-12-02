@@ -10,4 +10,5 @@
 Email: user@nextmail.com
 Password: 123456
 ```
-See more in `/scripts/seed.js`
+
+See more in `app/lib/placeholder-data.js`.
